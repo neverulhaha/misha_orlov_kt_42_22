@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace misha_orlov_kt_42_22.Models
 {
@@ -20,5 +21,10 @@ namespace misha_orlov_kt_42_22.Models
 
         [System.Text.Json.Serialization.JsonIgnore]
         public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+        public bool IsValidDepartmentName()
+        {
+            var regex = new Regex(@"^Кафедра [а-яё0-9№.,«»""–—\-'\/s]+(имени [А-ЯЁA-Z][а-яёa-zA-ZЁ\-\. ]+)?$");
+            return regex.IsMatch(Name);
+        }
     }
 }
